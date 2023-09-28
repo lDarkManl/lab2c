@@ -150,28 +150,3 @@ struct triangle {
     }
 };
 
-int main()
-{
-    SetConsoleCP(1251);
-    SetConsoleOutputCP(1251);
-    struct colored_point test, test2;
-    struct vector test_v, test_v2;
-    int* a;
-    /*strcpy(test.self_point.name, "A");
-    strcpy(test2.self_point.name, "B");
-    test.self_point.x = 1;
-    test2.self_point.x = 2;
-    test.self_point.y = 2;
-    test2.self_point.y = 3;
-    test.self_point.z = 3;
-    test2.self_point.z = 4;
-    strcpy(test.color, "red");
-    strcpy(test2.color, "blue");
-    test_v.point1 = test;
-    test_v.point2 = test2;*/
-    test_v.set_vector(&test_v);
-    test_v2.set_vector(&test_v2);
-    printf("Длина: %f\n", test_v.length_vector(&test_v));
-    printf("Скалярное произведение: %f\n", test_v.scalar_multiplication(&test_v, &test_v2));
-}
-
