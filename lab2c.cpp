@@ -1,129 +1,166 @@
 ﻿#include <iostream>
 #include <windows.h>
-#include <math.h>
 #include <format>
 #include <windows.h>
+#include <cmath>
+
 using namespace std;
 
-class Point {
+class ColoredPoint {
+private:
+    int x, y, z;
+    string name;
 public:
-	int x, y, z;
-	string name;
-    Point()
-    {
-        string name;
-        int x, y, z;
-        cout << "Введите название точки: ";
-        cin >> name;
-        cout << "Введите координаты точки: ";
-        cin >> x >> y >> z;
-        this->name = name;
+    ColoredPoint() {}
+
+    ColoredPoint(int x, int y, int z, string name) {
         this->x = x;
         this->y = y;
         this->z = z;
+        this->name = name;
     }
-    void print_point()
-    {
-        cout << this->name << this->x << this->y << this->z;
-    }
-};
 
-class ColoredPoint : public Point {
-public:
-    string color;
-    ColoredPoint()
-    {
-        cout << "Введите цвет: ";
-        cin >> color;
+    int getX() {
+        return x;
     }
-    void print_point()
-    {
-        Point::print_point();
-        cout << "Цвет: " << color;
+
+    int getY() {
+        return y;
+    }
+
+    int getZ() {
+        return z;
+    }
+
+    string getName() {
+        return name;
+    }
+
+    void printPoint() {
+        cout << "Точка " << name << "(" << x << ", " << y << ", " << z << ")" << endl;
     }
 };
 
 class Vector {
-public:
+private:
     ColoredPoint point1;
     ColoredPoint point2;
-    float length_vector()
-    {
-        return sqrt(pow((this->point2.x - this->point1.x), 2) + pow((this->point2.y - this->point1.y), 2) + pow((this->point2.z - this->point1.z), 2));
+
+public:
+    Vector() {}
+
+    Vector(ColoredPoint point1, ColoredPoint point2) {
+        this->point1 = point1;
+        this->point2 = point2;
     }
-    int* coordinates()
-    {
-        int coordinates[3] = { this->point2.x - this->point1.x,  this->point2.y - this->point1.y, this->point2.z - this->point1.z };
+
+    void setPoint2(ColoredPoint point) {
+        this->point2 = point;
+    }
+
+    ColoredPoint getPoint2() {
+        return this->point2;
+    }
+
+    void setPoint1(ColoredPoint point) {
+        this->point1 = point;
+    }
+
+    ColoredPoint getPoint1() {
+        return this->point1;
+    }
+
+    float lengthVector() {
+        return sqrt(pow(point2.getX() - point1.getX(), 2) + pow(point2.getY() - point1.getY(), 2) + pow(point2.getZ() - point1.getZ(), 2));
+    }
+
+    int* coordinates() {
+        static int coordinates[3];
+        coordinates[0] = point2.getX() - point1.getX();
+        coordinates[1] = point2.getY() - point1.getY();
+        coordinates[2] = point2.getZ() - point1.getZ();
         return coordinates;
     }
-    float scalar_multiplication(Vector* v2)
-    {
-        int* coordinates_v1 = this->coordinates(), *coordinates_v2 = v2->coordinates();
-        return coordinates_v1[0] * coordinates_v2[0] + coordinates_v1[1] * coordinates_v2[1] + coordinates_v1[2] * coordinates_v2[2];
+
+    float scalarMultiplication(Vector v2) {
+        int* coordinatesV1 = this->coordinates();
+        int* coordinatesV2 = v2.coordinates();
+        return coordinatesV1[0] * coordinatesV2[0] + coordinatesV1[1] * coordinatesV2[1] + coordinatesV1[2] * coordinatesV2[2];
     }
 
-    void print_vector()
-    {
+    void printVector() {
         int* coordinates = this->coordinates();
-        cout << "Вектор ", std::format("{}{}({}{}{})", this->point1.name, this->point2.name, coordinates[0], coordinates[1], coordinates[2]) ;
-    }
-};
-
-class Parallelogramm {
-public:
-    Vector vector1;
-    Vector vector2;
-    int perimeter()
-    {
-        return this->vector1.length_vector() * 2 + this->vector2.length_vector() * 2;
-    }
-    float square()
-    {
-        float cosinus, sinus, length_v1 = this->vector1.length_vector(), length_v2 = this->vector2.length_vector();
-        cosinus = this->vector1.scalar_multiplication(&this->vector2) / (length_v1 * length_v2);
-        sinus = sqrt(1 - pow(cosinus, 2));
-        return length_v1 * length_v2 * sinus;
-    }
-    void print_parallelogramm()
-    {
-        this->vector1.print_vector();
-        this->vector2.print_vector();
+        cout << "Вектор " << point1.getName() << point2.getName() << "(" << coordinates[0] << ", " << coordinates[1] << ", " << coordinates[2] << ")" << endl;
     }
 };
 
 class Triangle {
-public:
+private:
     ColoredPoint point1;
     ColoredPoint point2;
     ColoredPoint point3;
-    int perimeter()
-    {
-        Vector v1, v2, v3;
-        v1.point1 = this->point1;
-        v1.point2 = this->point2;
-        v2.point1 = this->point2;
-        v2.point2 = this->point3;
-        v3.point1 = this->point1;
-        v3.point2 = this->point3;
-        return v1.length_vector() + v2.length_vector() + v3.length_vector();
+
+public:
+    Triangle() {}
+
+    void setPoint1(ColoredPoint point) {
+        this->point1 = point;
     }
-    float square()
-    {
-        Vector v1, v2;
-        v1.point1 = this->point1;
-        v1.point2 = this->point2;
-        v2.point1 = this->point2;
-        v2.point2 = this->point3;
-        float cosinus, sinus, length_v1 = v1.length_vector(), length_v2 = v2.length_vector();
-        cosinus = v1.scalar_multiplication(&v2) / (length_v1 * length_v2);
+
+    ColoredPoint getPoint1() {
+        return this->point1;
+    }
+
+    void setPoint2(ColoredPoint point) {
+        this->point2 = point;
+    }
+
+    ColoredPoint getPoint2() {
+        return this->point2;
+    }
+
+    void setPoint3(ColoredPoint point) {
+        this->point3 = point;
+    }
+
+    ColoredPoint getPoint3() {
+        return this->point3;
+    }
+
+    int perimeter() {
+        Vector v1(this->point1, this->point2);
+        Vector v2(this->point2, this->point3);
+        Vector v3(this->point1, this->point3);
+        return (int)(v1.lengthVector() + v2.lengthVector() + v3.lengthVector());
+    }
+
+    float square() {
+        Vector v1(this->point1, this->point2);
+        Vector v2(this->point2, this->point3);
+        float cosinus, sinus, lengthV1 = v1.lengthVector(), lengthV2 = v2.lengthVector();
+        cosinus = v1.scalarMultiplication(v2) / (lengthV1 * lengthV2);
         sinus = sqrt(1 - pow(cosinus, 2));
-        return length_v1 * length_v2 * sinus / 2;
+        return lengthV1 * lengthV2 * sinus / 2;
     }
-    void print_triangle()
-    {
-        this->point1.print_point();
-        this->point2.print_point();
-        this->point3.print_point();
+
+    void printTriangle() {
+        point1.printPoint();
+        point2.printPoint();
+        point3.printPoint();
     }
 };
 
+int main() {
+    Triangle triangle;
+    ColoredPoint p1(0, 0, 0, "A");
+    ColoredPoint p2(1, 0, 0, "B");
+    ColoredPoint p3(0, 1, 0, "C");
+
+    triangle.setPoint1(p1);
+    triangle.setPoint2(p2);
+    triangle.setPoint3(p3);
+
+    triangle.printTriangle();
+
+    return 0;
+}
