@@ -130,9 +130,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="lab2c.cpp" />
+    <ClCompile Include="Parallelogram.cpp" />
+    <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="lab2c.h" />
+    <ClInclude Include="Parallelogram.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="Triangle.h" />
+    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
