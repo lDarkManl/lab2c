@@ -10,7 +10,6 @@ class Point {
 private:
     int x, y, z;
     string name;
-    //Счетчик количества объектов - статическая переменная
     static int count;
 public:
     Point() {
@@ -19,12 +18,20 @@ public:
 
     Point(int x, int y, int z, string name) {
         count++;
-        this->x = x;
-        this->y = y;
-        this->z = z;
+        try {
+            if (x < 0 || y < 0 || z < 0) {
+                throw "Отрицательные значения координат не допускаются";
+            }
+            this->x = x;
+            this->y = y;
+            this->z = z;
+            this->name = name;
+        }
+        catch (const char* errorMessage) {
+            cout << "Ошибка: " << errorMessage << endl;
+        }
         this->name = name;
     }
-    //Статический метод - вывод формата вывода точки
     static void printFormat() {
         cout << "Точка <название точки>(x, y, z)" << endl;
     }
@@ -48,7 +55,6 @@ public:
     void printPoint() {
         cout << "Точка " << name << "(" << x << ", " << y << ", " << z << ")" << endl;
     }
-    //Перегрузка оператора +
     Point operator +(Point point) {
         return Point(this->x + point.getX(), this->y + point.getY(), this->z + point.getZ(), this->name + point.getName());
     }

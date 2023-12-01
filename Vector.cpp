@@ -13,7 +13,6 @@ private:
     Point point2;
 
 public:
-    //Дружественная функция
     friend void setPoints(Vector vector, Point point1, Point point2)
     {
         vector.point1 = point1;
@@ -47,7 +46,6 @@ public:
         return sqrt(pow(point2.getX() - point1.getX(), 2) + pow(point2.getY() - point1.getY(), 2) + pow(point2.getZ() - point1.getZ(), 2));
     }
 
-    //Возврат указателя
     int* coordinates() {
         static int coordinates[3];
         coordinates[0] = point2.getX() - point1.getX();
@@ -62,7 +60,6 @@ public:
         return coordinatesV1[0] * coordinatesV2[0] + coordinatesV1[1] * coordinatesV2[1] + coordinatesV1[2] * coordinatesV2[2];
     }
 
-    //Оператор this
     void printVector() {
         int* coordinates = this->coordinates();
         cout << "Вектор " << point1.getName() << point2.getName() << "(" << coordinates[0] << ", " << coordinates[1] << ", " << coordinates[2] << ")" << endl;
