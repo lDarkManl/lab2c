@@ -28,5 +28,5 @@ public:
 
     float square();
 
-    void printTriangle();
+    void print();
 };

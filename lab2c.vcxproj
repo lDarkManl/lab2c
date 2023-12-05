@@ -129,12 +129,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ColoredPoint.cpp" />
+    <ClCompile Include="Figure.cpp" />
     <ClCompile Include="Parallelogram.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColoredPoint.h" />
+    <ClInclude Include="Figure.h" />
     <ClInclude Include="Parallelogram.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="Triangle.h" />

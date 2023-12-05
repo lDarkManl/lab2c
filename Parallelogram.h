@@ -21,5 +21,5 @@ public:
 
     int perimeter();
 
-    void printParallelogram();
+    void print();
 };

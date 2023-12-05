@@ -4,11 +4,11 @@
 #include <windows.h>
 #include <cmath>
 #include "Vector.h"
-
+#include "Figure.h"
 using namespace std;
 
 
-class Parallelogram {
+class Parallelogram : Figure {
 private:
     Vector vector1;
     Vector vector2;
@@ -46,7 +46,7 @@ public:
         return (int)(vector1.lengthVector() * 2 + vector2.lengthVector() * 2);
     }
 
-    void printParallelogram() {
+    void print() {
         vector1.printVector();
         vector2.printVector();
     }

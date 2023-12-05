@@ -5,10 +5,11 @@
 #include <cmath>
 #include "Point.h"
 #include "Vector.h"
+#include "Figure.h"
 
 using namespace std;
 
-class Triangle {
+class Triangle : Figure {
 private:
     Point point1;
     Point point2;
@@ -57,7 +58,7 @@ public:
         return lengthV1 * lengthV2 * sinus / 2;
     }
 
-    void printTriangle() {
+    void print() {
         point1.printPoint();
         point2.printPoint();
         point3.printPoint();
