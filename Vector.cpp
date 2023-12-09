@@ -3,54 +3,57 @@
 #include <format>
 #include <windows.h>
 #include <cmath>
+#include <list>
 #include "Point.h"
 
 using namespace std;
 
+//Добавлен контейнер
 class Vector {
 private:
-    Point point1;
-    Point point2;
+    list <Point> points;
 
 public:
     friend void setPoints(Vector vector, Point point1, Point point2)
     {
-        vector.point1 = point1;
-        vector.point2 = point2;
+        vector.points.push_back(point1);
+        vector.points.push_back(point2);
     }
 
     Vector() {}
 
     Vector(Point point1, Point point2) {
-        this->point1 = point1;
-        this->point2 = point2;
+        this->points.push_back(point1);
+        this->points.push_back(point2);
     }
 
     void setPoint2(Point point) {
-        this->point2 = point;
+        this->points.pop_back();
+        this->points.push_back(point);
     }
 
     Point getPoint2() {
-        return this->point2;
+        return this->points.back();
     }
 
     void setPoint1(Point point) {
-        this->point1 = point;
+        this->points.pop_front();
+        this->points.push_front(point);
     }
 
     Point getPoint1() {
-        return this->point1;
+        return this->points.front();
     }
 
     float lengthVector() {
-        return sqrt(pow(point2.getX() - point1.getX(), 2) + pow(point2.getY() - point1.getY(), 2) + pow(point2.getZ() - point1.getZ(), 2));
+        return sqrt(pow(points.back().getX() - points.front().getX(), 2) + pow(points.back().getY() - points.front().getY(), 2) + pow(points.back().getZ() - points.front().getZ(), 2));
     }
 
     int* coordinates() {
         static int coordinates[3];
-        coordinates[0] = point2.getX() - point1.getX();
-        coordinates[1] = point2.getY() - point1.getY();
-        coordinates[2] = point2.getZ() - point1.getZ();
+        coordinates[0] = points.back().getX() - points.front().getX();
+        coordinates[1] = points.back().getY() - points.front().getY();
+        coordinates[2] = points.back().getZ() - points.front().getZ();
         return coordinates;
     }
 
@@ -62,6 +65,6 @@ public:
 
     void printVector() {
         int* coordinates = this->coordinates();
-        cout << "Вектор " << point1.getName() << point2.getName() << "(" << coordinates[0] << ", " << coordinates[1] << ", " << coordinates[2] << ")" << endl;
+        cout << "Вектор " << points.front().getName() << points.back().getName() << "(" << coordinates[0] << ", " << coordinates[1] << ", " << coordinates[2] << ")" << endl;
     }
 };

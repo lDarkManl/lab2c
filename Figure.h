@@ -7,4 +7,4 @@ private:
 public:
 	virtual void print();
 	virtual int perimeter();
-};
+};	
